@@ -1,0 +1,16 @@
+import asyncio
+
+async def chamada_simulada():
+    await asyncio.sleep(2)  # Simula uma chamada de rede com 2 segundos de atraso
+    return 2
+
+async def executar_tarefas():
+    inicio = asyncio.time.time()
+    
+    tarefas = [chamada_simulada() for _ in range(3)]
+    resultados = await asyncio.gather(*tarefas)
+
+    fim = asyncio.time.time()
+    print(f"Tempo total de execução: {fim - inicio:.2f} segundos")
+
+asyncio.run(executar_tarefas())

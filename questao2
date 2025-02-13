@@ -1,0 +1,18 @@
+#Ler o arquivo CSV, calcular o faturamento total por produto e identificar o de maior e menor valores
+
+#Importando com pandas
+import pandas as pd
+
+# Leitura do arquivo CSV (Inferindo-se que o nome do arquivo seja "vendas")
+df = pd.read_csv("vendas.csv")
+
+# Cálculo do faturamento total por produto
+df["faturamento"] = df["quantidade"] * df["preco_unitario"]
+faturamento_por_produto = df.groupby("produto")["faturamento"].sum()
+
+# Identificando o produto com maior e menor valor de faturamento
+produto_mais_vendeu = faturamento_por_produto.idxmax()
+produto_menos_vendeu = faturamento_por_produto.idxmin()
+
+print(f"Produto com maior faturamento: {produto_mais_vendeu}")
+print(f"Produto com menor faturamento: {produto_menos_vendeu}")
